@@ -6,4 +6,6 @@ public class Block {
     public String generatorPublicKey;
     public String previousBlock;
     public List<Transaction> transactions;
+
+    public long generatorBalance;
 }
