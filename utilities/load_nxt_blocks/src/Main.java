@@ -9,7 +9,7 @@ import org.json.JSONArray;
 public class Main {
     private static final String NXT_GENESIS_BLOCK_CSV  = "data/NxtGenesisBlock.csv";
     private static final String NXT_BLOCKS_JSON  = "out/nxtblocks.json";
-    private static final String NXT_FEES_CSV  = "out/nxtfees.txt";
+    private static final String NXT_FEES_CSV  = "out/nxtfees.csv";
 
     private static void PrintUsage() {
         System.out.println("Usage: application <mode> (options)");
@@ -84,7 +84,7 @@ public class Main {
         try (FileWriter fileWriter = new FileWriter(NXT_FEES_CSV)) {
             try (BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
                 for (Block block : blocks) {
-                    String line = String.format("%s,%s,%s", block.generatorPublicKey, block.generatorPublicKey, block.totalFee);
+                    String line = String.format("%s,%s,%s", block.generatorPublicKey, block.generatorBalance, block.totalFee);
                     bufferedWriter.write(line);
                     bufferedWriter.newLine();
                 }

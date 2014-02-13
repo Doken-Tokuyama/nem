@@ -43,9 +43,9 @@ public class Downloader {
                 continue;
 
             String[] parts = line.split(",");
-            String accountId = parts[0];
+            String accountPublicKey = this.GetPublicKey(parts[0]);
             long accountBalance = Long.parseLong(parts[1]);
-            this.IncrementBalance(accountId, accountBalance);
+            this.IncrementBalance(accountPublicKey, accountBalance);
         }
     }
 
@@ -100,9 +100,9 @@ public class Downloader {
     }
 
     private void UpdateTransaction(final Transaction transaction) throws Exception {
-        String recipientPublicKey = this.GetPublicKey(transaction.recipient);
+        transaction.recipientPublicKey = this.GetPublicKey(transaction.recipient);
         transaction.senderBalance = this.GetBalance(transaction.senderPublicKey);
-        transaction.recipientBalance = this.GetBalance(recipientPublicKey);
+        transaction.recipientBalance = this.GetBalance(transaction.recipientPublicKey);
     }
 
     private long GetBalance(final String publicKey) {

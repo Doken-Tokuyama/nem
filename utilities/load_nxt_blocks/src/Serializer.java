@@ -10,6 +10,8 @@ public class Serializer {
         block.totalFee = object.getInt("totalFee");
         block.previousBlock = object.getString("previousBlock");
 
+        block.generatorBalance = object.optLong("generatorBalance");
+
         block.transactions = new ArrayList<>();
         JSONArray transactions = object.getJSONArray("transactions");
         for (int i = 0; i < transactions.length(); ++i) {
@@ -28,6 +30,10 @@ public class Serializer {
         transaction.senderPublicKey = object.getString("senderPublicKey");
         transaction.subtype = object.getInt("subtype");
         transaction.type = object.getInt("type");
+
+        transaction.senderBalance = object.optLong("senderBalance");
+        transaction.recipientBalance = object.optLong("recipientBalance");
+        transaction.recipientPublicKey = object.optString("recipientPublicKey");
         return transaction;
     }
 
@@ -37,6 +43,8 @@ public class Serializer {
         object.put("totalFee", block.totalFee);
         object.put("generatorPublicKey", block.generatorPublicKey);
         object.put("previousBlock", block.previousBlock);
+
+        object.put("generatorBalance", block.generatorBalance);
 
         final JSONArray transactions = new JSONArray();
         for (final Transaction transaction : block.transactions)
